@@ -24,15 +24,11 @@
         background-color: #000 !important;
         color: #e5e5e5;
     }
-    /* CRITICAL: Allows the page to actually scroll on high-end iPhones */
-    html, body {
-        overflow-x: hidden;
-        height: auto !important;
-    }
     .navbar-brand { font-weight: 800; letter-spacing: 1px; }
     .heading-section h2 { color: #fff !important; }
     .heading-section .big { color: rgba(255, 255, 255, 0.05) !important; }
 
+    /* 2. PROJECT CARDS */
     .project { border-radius: 12px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); border: 1px solid #111; margin-bottom: 30px; }
     .project:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(249,109,0,0.2); border-color: #333; }
     .project .text h3 a { color: #fff; font-weight: 700; }
@@ -47,7 +43,7 @@
         opacity: 0.9;
     }
 
-    /* 2. BUTTONS & DESKTOP HERO */
+    /* 3. BUTTONS & DESKTOP HERO */
     .slider-text h1 span { color: #ffbd39; }
     .btn-primary { border: 1px solid #ffbd39 !important; background: #ffbd39 !important; }
     .btn-outline-white:hover { background: #fff !important; color: #000 !important; }
@@ -60,17 +56,36 @@
         background-color: #000 !important;
     }
 
-    /* 3. THE UNIFIED MOBILE BLOCK (iPhone 16 Pro Max Optimized) */
-    @media (max-width: 767.98px) {
-        /* SCROLL FIX: Forces the phone to prioritize vertical swiping */
-        .hero, .ftco-degree-bg, .slider-item {
-            pointer-events: auto !important;
-            touch-action: pan-y !important;
+    /* ----------------------------------------------------------- */
+    /* 4. THE NUCLEAR MOBILE FIX (Copy this exactly) */
+    /* ----------------------------------------------------------- */
+    @media (max-width: 991.98px) {
+
+        /* A. Force the body to be scrollable on iOS */
+        html, body {
+            overflow-x: hidden !important;
+            overflow-y: scroll !important; /* Force vertical scrollbar */
             height: auto !important;
-            min-height: 85vh !important;
+            min-height: 100% !important;
+            -webkit-overflow-scrolling: touch !important; /* Smooth iOS scroll */
+            position: relative !important; /* Stops 'fixed' body locking */
         }
 
-        /* IMAGE FIX: Makes you bigger and keeps your head at the top */
+        /* B. Break the JavaScript Height Lock */
+        /* These classes usually trap the scroll. We force them open. */
+        .hero-wrap, .home-slider, .slider-item, .owl-stage-outer, .owl-stage {
+            height: auto !important; /* overrides JS window.height() */
+            min-height: 85vh !important;
+            overflow: visible !important; /* Let content spill out so we can scroll to it */
+        }
+
+        /* C. Stop the Slider from stealing your touch */
+        /* This tells the iPhone: "Swiping here scrolls the page, it doesn't swipe the image" */
+        .owl-carousel, .slider-item, .img {
+            touch-action: pan-y !important;
+        }
+
+        /* D. Visual Fixes (Face & Text) */
         .hero .slider-item .img {
             background-size: cover !important;
             background-position: center top !important;
@@ -78,20 +93,18 @@
             opacity: 0.8;
         }
 
-        /* TEXT FIX: Pushes text to chest area to clear your face */
         .slider-text .text {
             text-align: center !important;
-            padding-top: 350px !important; /* Adjust this to move text lower/higher */
-            padding-bottom: 50px !important;
+            padding-top: 350px !important;
+            padding-bottom: 100px !important; /* Extra padding at bottom to ensure scroll space */
         }
 
         .slider-text h1 {
-            font-size: 30px !important;
+            font-size: 32px !important;
             line-height: 1.1 !important;
             margin-bottom: 15px !important;
         }
 
-        /* BUTTON FIX: Vertical stacking for thumbs */
         .slider-text .text p {
             display: flex !important;
             flex-direction: column !important;
@@ -100,9 +113,9 @@
         }
 
         .slider-text .text p .btn {
-            margin: 0 !important;
             width: 100%;
             max-width: 250px;
+            margin: 0 !important;
         }
     }
 </style>

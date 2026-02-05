@@ -117,6 +117,21 @@
             max-width: 250px;
             margin: 0 !important;
         }
+        /* 🔑 THIS is the missing piece */
+      .home-slider {
+        position: relative !important;
+      }
+
+      /* Disable owl dragging on mobile so scroll wins */
+      .owl-carousel {
+        pointer-events: none;
+      }
+
+      /* Re-enable buttons/links inside */
+      .owl-carousel .btn,
+      .owl-carousel a {
+        pointer-events: auto;
+      }
     }
 </style>
 </head>

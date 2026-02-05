@@ -19,16 +19,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
     <style>
-    /* 1. GLOBAL STYLES */
+    /* 1. GLOBAL & PROJECT STYLES */
     body, .ftco-section, .ftco-footer, .ftco-project {
         background-color: #000 !important;
         color: #e5e5e5;
+    }
+    /* CRITICAL: Allows the page to actually scroll on high-end iPhones */
+    html, body {
+        overflow-x: hidden;
+        height: auto !important;
     }
     .navbar-brand { font-weight: 800; letter-spacing: 1px; }
     .heading-section h2 { color: #fff !important; }
     .heading-section .big { color: rgba(255, 255, 255, 0.05) !important; }
 
-    /* 2. PROJECT CARDS */
     .project { border-radius: 12px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275); border: 1px solid #111; margin-bottom: 30px; }
     .project:hover { transform: translateY(-10px); box-shadow: 0 0 25px rgba(249,109,0,0.2); border-color: #333; }
     .project .text h3 a { color: #fff; font-weight: 700; }
@@ -43,73 +47,64 @@
         opacity: 0.9;
     }
 
-    /* 3. HERO SLIDER BUTTONS & COLORS */
+    /* 2. BUTTONS & DESKTOP HERO */
     .slider-text h1 span { color: #ffbd39; }
     .btn-primary { border: 1px solid #ffbd39 !important; background: #ffbd39 !important; }
     .btn-outline-white:hover { background: #fff !important; color: #000 !important; }
 
-    /* 4. MOBILE LAYOUT FIXES (Buttons & Text) */
+    .hero .slider-item .img {
+        background-size: contain !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+        background-color: #000 !important;
+    }
+
+    /* 3. THE UNIFIED MOBILE BLOCK (iPhone 16 Pro Max Optimized) */
     @media (max-width: 767.98px) {
-        .slider-text .text p {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
+        /* SCROLL FIX: Forces the phone to prioritize vertical swiping */
+        .hero, .ftco-degree-bg, .slider-item {
+            pointer-events: auto !important;
+            touch-action: pan-y !important;
+            height: auto !important;
+            min-height: 85vh !important;
         }
+
+        /* IMAGE FIX: Makes you bigger and keeps your head at the top */
+        .hero .slider-item .img {
+            background-size: cover !important;
+            background-position: center top !important;
+            height: 85vh !important;
+            opacity: 0.8;
+        }
+
+        /* TEXT FIX: Pushes text to chest area to clear your face */
+        .slider-text .text {
+            text-align: center !important;
+            padding-top: 350px !important; /* Adjust this to move text lower/higher */
+            padding-bottom: 50px !important;
+        }
+
+        .slider-text h1 {
+            font-size: 30px !important;
+            line-height: 1.1 !important;
+            margin-bottom: 15px !important;
+        }
+
+        /* BUTTON FIX: Vertical stacking for thumbs */
+        .slider-text .text p {
+            display: flex !important;
+            flex-direction: column !important;
+            align-items: center !important;
+            gap: 15px !important;
+        }
+
         .slider-text .text p .btn {
-            margin-right: 0 !important;
+            margin: 0 !important;
             width: 100%;
             max-width: 250px;
         }
-        .slider-text .text {
-            text-align: center !important;
-            padding-top: 0 !important;
-        }
     }
-
-    /* 5. THE HERO IMAGE ZOOM FIX */
-
-/* Desktop: Keep it clean and contained */
-.hero .slider-item .img {
-    background-size: contain !important;
-    background-position: center top !important;
-    background-repeat: no-repeat !important;
-    background-attachment: scroll !important;
-    background-color: #000 !important;
-}
-
-/* Mobile: Make the image bigger and background-aligned */
-@media (max-width: 767.98px) {
-    /* 1. Make the image fill the width and keep your head at the top */
-    .hero .slider-item .img {
-        background-size: cover !important;
-        background-position: center top !important; /* Keeps your face at the top */
-        height: 85vh !important; /* Makes the image much taller/bigger */
-        opacity: 0.8;
-    }
-
-    /* 2. Push the text down so it sits on your chest/shoulders */
-    .slider-text .text {
-        padding-top: 320px !important; /* Adjust this number to move text up or down */
-        margin-top: 0 !important; /* Removes the overlap pull */
-        text-align: center !important;
-    }
-
-    /* 3. Make the text slightly smaller to fit better on mobile */
-    .slider-text h1 {
-        font-size: 32px !important;
-        line-height: 1.1 !important;
-        margin-bottom: 20px !important;
-    }
-
-    /* 4. Stack the buttons neatly at the bottom */
-    .slider-text .text p {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        gap: 12px !important;
-    }
-}
 </style>
 </head>
 

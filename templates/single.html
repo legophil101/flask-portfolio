@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Philip Barlaan | {{ project.title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/open-iconic-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aos.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icomoon.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+      /* --- GLOBAL AESTHETIC OVERRIDES --- */
+      body, .ftco-section, .ftco-footer {
+        background-color: #000000 !important;
+        color: #e5e5e5;
+      }
+
+      /* Fix Navbar Brand for consistency */
+      .navbar-brand { font-weight: 800; letter-spacing: 1px; }
+
+      /* Hero breadcrumb contrast */
+      .breadcrumbs span, .breadcrumbs a { color: rgba(255, 255, 255, 0.8) !important; }
+
+      /* Project Image Glow */
+      .demo-img-container img {
+        box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5), 0px 0px 15px rgba(249, 109, 0, 0.1);
+        transition: transform 0.4s ease;
+      }
+      .demo-img-container img:hover { transform: scale(1.01); }
+
+      /* Tech Tags Polish */
+      .tag-cloud-link {
+        background: #121212 !important;
+        border: 1px solid #333 !important;
+        color: #aaa !important;
+        border-radius: 4px !important;
+        padding: 5px 15px !important;
+        transition: 0.3s all ease;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
+      .tag-cloud-link:hover {
+        border-color: #ffbd39 !important; /* Matches Clark's highlight color */
+        color: #fff !important;
+        box-shadow: 0 0 10px rgba(255, 189, 57, 0.2);
+      }
+
+      /* Sidebar Refinement */
+      .sidebar-box {
+        background-color: #0a0a0a !important;
+        border: 1px solid #1a1a1a !important;
+      }
+
+      /* --- BUTTON LAYOUT ENGINE --- */
+
+      /* 1. DESKTOP DEFAULT: Align Left */
+      .project-actions {
+          display: flex;
+          justify-content: flex-start; /* Forces Left Alignment on Desktop */
+          flex-wrap: wrap;
+          gap: 6px; /* Clean spacing between buttons */
+      }
+
+      /* Common Button Styles */
+      .btn-primary, .btn-outline-white {
+          width: 220px !important;
+          display: inline-flex !important;
+          align-items: center;
+          justify-content: center;
+          text-transform: uppercase;
+          font-size: 13px;
+          letter-spacing: 1px;
+          font-weight: 600;
+          height: 55px !important;
+          margin: 0 !important; /* Reset margin so 'gap' handles spacing */
+          transition: all 0.3s ease;
+      }
+
+      /* Specific Style for White Button */
+      .btn-outline-white {
+          border: 1px solid #ffffff !important;
+          color: #ffffff !important;
+          background: transparent !important;
+      }
+
+      .btn-outline-white:hover {
+          background: #ffbd39 !important;
+          color: #000 !important;
+          border-color: #ffbd39 !important;
+      }
+
+      /* 2. MOBILE OVERRIDE: Center & Stack */
+      @media (max-width: 767.98px) {
+          .project-actions {
+              justify-content: center; /* Centers the container */
+              flex-direction: column;  /* Stacks buttons vertically */
+              align-items: center;     /* Centers the stack */
+          }
+
+          .btn-primary {
+              margin-bottom: 12px !important; /* Adds space between the stacked buttons */
+          }
+      }
+    </style>
+  </head>
+
+  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="/">Philip</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav nav ml-auto">
+          <li class="nav-item"><a href="{{ url_for('home') }}#home-section" class="nav-link"><span>Home</span></a></li>
+          <li class="nav-item"><a href="{{ url_for('home') }}#projects-section" class="nav-link"><span>Back to Projects</span></a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
+
+    <section class="hero-wrap js-fullheight" style="background-image: url('{{ url_for('static', filename='images/' + project.cover_image) }}');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-center">
+          <div class="col-md-12 ftco-animate pb-5 mb-3 text-center">
+            <h1 class="mb-3 bread">{{ project.title }}</h1>
+            <p class="breadcrumbs">
+                <span class="mr-2"><a href="/">Home <i class="ion-ios-arrow-forward"></i></a></span>
+                <span>Project Details <i class="ion-ios-arrow-forward"></i></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <h2 class="mb-3 text-white">Project Overview</h2>
+            <p class="text-light" style="font-size: 18px; line-height: 1.8;">{{ project.description }}</p>
+
+            <div class="mt-5 mb-5 demo-img-container">
+                <img src="{{ url_for('static', filename='images/' + project.demo_image) }}" alt="{{ project.title }}" class="img-fluid rounded border border-secondary">
+            </div>
+
+            <h3 class="mb-3 mt-5 text-white">Tech Stack</h3>
+            <div class="tag-widget post-tag-container mb-5 mt-2">
+              <div class="tagcloud">
+                {% for tech in project.tech %}
+                <span class="tag-cloud-link">{{ tech }}</span>
+                {% endfor %}
+              </div>
+            </div>
+
+            <div class="pt-5 pb-5 project-actions">
+                <a href="{{ project.github }}" target="_blank" class="btn btn-primary py-3 px-5">View Source Code</a>
+                <a href="{{ url_for('home') }}#projects-section" class="btn btn-outline-white py-3 px-5">Other Projects</a>
+            </div>
+          </div>
+
+          <div class="col-lg-4 sidebar ftco-animate">
+            <div class="sidebar-box p-4 rounded">
+                <h3 class="heading-sidebar text-white">Information</h3>
+                <ul class="categories list-unstyled">
+                  <li class="mb-2 text-light"><strong class="text-white">Role:</strong> Python Developer</li>
+                  <li class="mb-2 text-light"><strong class="text-white">Year:</strong> 2026</li>
+                  <li class="mb-2 text-light"><strong class="text-white">Platform:</strong> {{ project.tech[0] }}</li>
+                </ul>
+            </div>
+
+            <div class="sidebar-box p-4 rounded mt-4">
+              <h3 class="heading-sidebar text-white">Author</h3>
+              <p class="text-light mb-0">Philip Aron Barlaan - Specialized in Python automation and Flask web development.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-section">
+      <div class="container text-center">
+        <p class="mb-0" style="color: #666;">Philip Barlaan &copy; 2026 | Built with Flask</p>
+      </div>
+    </footer>
+
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-migrate-3.0.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.waypoints.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.stellar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.carousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.animateNumber.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/aos.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/scrollax.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+  </body>
+</html>

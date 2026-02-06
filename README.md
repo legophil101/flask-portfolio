@@ -41,6 +41,7 @@ flask-portfolio/
 ├── main.py
 ├── requirements.txt
 ├── .gitignore
+├── vercel.json     # Configuration for deployment on Vercel
 ├── templates/
 │   ├── index.html
 │   └── single.html
